@@ -1,5 +1,5 @@
 public sealed class SudokuStruct{
-    public int[,] sudoku;
+    public int[][] sudoku;
     
     #region Singleton
     private static SudokuStruct instance = null;
@@ -14,7 +14,10 @@ public sealed class SudokuStruct{
     #endregion
 
     private SudokuStruct() {
-        sudoku = new int[9,9];
+        sudoku = new int[9][];
+        for(int i = 0; i < 10; i++){
+            sudoku[i] = new int[9];
+        }
     }
 
 
