@@ -5,13 +5,13 @@ public class SudokuReader : IDisposable
         throw new NotImplementedException();
     }
 
-    public SudokuStruct Read(string s)
+    public ResultStatusWrapper Read(string s)
     {
         string[] stringInLine = s.Split('\n');
         if (stringInLine.Length != 9)
         {
             Console.WriteLine("Sudoku not correct");
-            return null;
+            return new ResultStatusWrapper("KO", "Length not right");
         }
 
         int[][] sudo = new int[9][];
@@ -23,14 +23,13 @@ public class SudokuReader : IDisposable
                 if (!Int32.TryParse(row[j], out sudo[i][j]))
                 {
                     Console.WriteLine("Input not correct");
-
-                    return null;
+                    return new ResultStatusWrapper("KO", "Input not correct");
                 }
             }
         }
 
         SudokuStruct.Instance.sudoku = sudo;
-        return null;
+        return new ResultStatusWrapper("OK");
     }
 
 }
